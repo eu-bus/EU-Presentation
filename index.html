@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EU-BUS Presentation</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" style="border-radius: 50%;">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563EB', // Blue 600
+                        secondary: '#1E40AF', // Blue 800
+                        accent: '#60A5FA', // Blue 400
+                        light: '#F8FAFC', // Slate 50
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-slate-50 text-slate-800 en-mode">
+
+    <!-- Language Toggle -->
+    <button id="lang-toggle" class="lang-btn" onclick="toggleLanguage()">
+        <span class="lang-ar text-xl">EN</span>
+        <span class="lang-en text-xl">AR</span>
+    </button>
+
+    <!-- Progress Bar -->
+    <div id="progress" class="progress-bar" style="width: 0%;"></div>
+
+    <!-- Navigation Buttons -->
+    <button class="nav-btn prev-btn" onclick="navigate(-1)" aria-label="Previous">
+        <i class="fas fa-chevron-left text-xl"></i>
+    </button>
+    <button class="nav-btn next-btn" onclick="navigate(1)" aria-label="Next">
+        <i class="fas fa-chevron-right text-xl"></i>
+    </button>
+
+    <!-- Slide 1: Intro -->
+    <div class="slide active" id="slide-1" data-steps="0">
+        <div class="text-center fade-up w-full max-w-lg md:my-auto mt-auto mb-auto">
+            <div
+                class="relative w-56 h-56 md:w-72 md:h-72 mx-auto mb-10 md:mb-12 bg-white rounded-full shadow-2xl p-4 logo-glow flex items-center justify-center border-8 border-white animate-float">
+                <img src="assets/logo.png" alt="EU-BUS Logo" class="w-full h-full object-contain rounded-full">
+            </div>
+            <h1 class="text-6xl md:text-7xl font-black text-primary mb-6 tracking-tight drop-shadow-sm">EU-BUS</h1>
+            <p class="text-3xl md:text-4xl text-slate-700 font-bold drop-shadow-md">
+                <span class="lang-ar">مستقبل النقل الجامعي الذكي</span>
+                <span class="lang-en">The Future of Smart University Transport</span>
+            </p>
+            <div class="mt-16 hidden md:block">
+                <button onclick="navigate(1)"
+                    class="animate-bounce text-slate-700 text-3xl hover:text-blue-600 transition-colors">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide" id="slide-2" data-steps="2">
+        <div class="container mx-auto max-w-6xl w-full">
+            <h2
+                class="text-3xl md:text-4xl font-bold text-primary mb-8 md:mb-12 text-center fade-up border-b-4 border-primary/20 pb-4 inline-block mx-auto max-w-xs md:max-w-none">
+                <span class="lang-ar">المشكلة</span>
+                <span class="lang-en">The Problem</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center fade-up">
+                <!-- Step 1: The Problems -->
+                <div class="space-y-4 md:space-y-6 text-lg md:text-xl step-content step-1">
+                    <div class="bg-white p-5 md:p-6 rounded-xl shadow-sm border-r-4 border-red-500">
+                        <h3 class="font-bold text-red-500 mb-2 flex items-center gap-2">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="lang-ar">معاناة الوصول</span>
+                            <span class="lang-en">Commuting Struggle</span>
+                        </h3>
+                        <p class="text-slate-600 text-sm md:text-base">
+                            <span class="lang-ar">ملايين الطلاب يعانون يوميًا من مواصلات عامة غير منظمة، مما يسبب
+                                الإرهاق والتأخير.</span>
+                            <span class="lang-en">Millions of students suffer daily from chaotic public transport,
+                                causing fatigue and delays.</span>
+                        </p>
+                    </div>
+                    <div class="bg-white p-5 md:p-6 rounded-xl shadow-sm border-r-4 border-orange-500">
+                        <h3 class="font-bold text-orange-500 mb-2 flex items-center gap-2">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span class="lang-ar">إهدار الوقت</span>
+                            <span class="lang-en">Wasted Time</span>
+                        </h3>
+                        <p class="text-slate-600 text-sm md:text-base">
+                            <span class="lang-ar">انتظار طويل ومشي بين المواصلات يؤدي لضعف التركيز والغياب.</span>
+                            <span class="lang-en">Long waits and walking between rides lead to poor focus and
+                                absenteeism.</span>
+                        </p>
+                    </div>
+                    <div class="bg-white p-5 md:p-6 rounded-xl shadow-sm border-r-4 border-yellow-500">
+                        <h3 class="font-bold text-yellow-500 mb-2 flex items-center gap-2">
+                            <i class="fas fa-lock"></i>
+                            <span class="lang-ar">انعدام الأمان</span>
+                            <span class="lang-en">Safety Concerns</span>
+                        </h3>
+                        <p class="text-slate-600 text-sm md:text-base">
+                            <span class="lang-ar">التكدس، التدافع، واستغلال السائقين، خاصة للطالبات.</span>
+                            <span class="lang-en">Overcrowding, pushing, and exploitation by drivers, especially for
+                                female students.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2: Stats -->
+                <div
+                    class="bg-blue-50 p-6 md:p-8 rounded-2xl border border-blue-100 fade-up mt-4 md:mt-0 step-content step-2">
+                    <h3 class="text-xl md:text-2xl font-bold text-primary mb-6 text-center">
+                        <span class="lang-ar">حجم المشكلة في مصر</span>
+                        <span class="lang-en">Problem Scale in Egypt</span>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4 md:gap-6 text-center">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <i class="fas fa-university text-2xl md:text-3xl text-secondary mb-2"></i>
+                            <div class="text-2xl md:text-3xl font-bold text-slate-800">132</div>
+                            <div class="text-xs md:text-sm text-slate-500">
+                                <span class="lang-ar">جامعة</span>
+                                <span class="lang-en">Universities</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <i class="fas fa-building-columns text-2xl md:text-3xl text-secondary mb-2"></i>
+                            <div class="text-2xl md:text-3xl font-bold text-slate-800">185</div>
+                            <div class="text-xs md:text-sm text-slate-500">
+                                <span class="lang-ar">معهد</span>
+                                <span class="lang-en">Institutes</span>
+                            </div>
+                        </div>
+                        <div class="col-span-2 bg-white p-4 rounded-lg shadow-sm">
+                            <i class="fas fa-users text-2xl md:text-3xl text-secondary mb-2"></i>
+                            <div class="text-3xl md:text-4xl font-bold text-primary">3.9M+</div>
+                            <div class="text-xs md:text-sm text-slate-500">
+                                <span class="lang-ar">طالب (زيادة 100k سنويًا)</span>
+                                <span class="lang-en">Students (+100k annually)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: The Solution (Split Layout) -->
+    <div class="slide" id="slide-3" data-steps="1">
+        <!-- Added pb-24 for mobile extra spacing at bottom -->
+        <div class="container mx-auto max-w-7xl w-full h-full flex flex-col md:justify-center pb-24 md:pb-0">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 h-auto md:h-[600px] items-stretch">
+
+                <!-- Report / Typing Text (Right in RTL) -->
+                <div class="flex flex-col h-full">
+                    <h2 class="text-3xl font-bold text-primary mb-4 fade-up">
+                        <span class="lang-ar">الحل</span>
+                        <span class="lang-en">The Solution</span>
+                    </h2>
+                    <div
+                        class="bg-white p-5 rounded-2xl shadow-lg border border-slate-200 flex-grow flex flex-col fade-up h-full overflow-hidden">
+                        <h3 class="text-lg font-bold text-secondary mb-2 border-b pb-2">
+                            <span class="lang-ar">كيف يحل EU-BUS المشكلة؟</span>
+                            <span class="lang-en">How EU-BUS Solves the Problem?</span>
+                        </h3>
+                        <div id="typing-container"
+                            class="text-slate-700 text-xs md:text-sm leading-loose font-bold typing-cursor flex-grow">
+                            <!-- JS will Type here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cards (Left in RTL) -->
+                <div class="flex flex-col h-full">
+                    <!-- Hidden Header alignment -->
+                    <h2 class="text-3xl font-bold text-transparent mb-4 select-none hidden md:block" aria-hidden="true">
+                        .</h2>
+
+                    <div class="step-content step-1 grid grid-cols-2 grid-rows-3 gap-3 h-full opacity-100">
+                        <!-- Card 1 -->
+                        <div
+                            class="bg-white p-3 md:p-4 rounded-xl shadow-lg border-r-4 border-blue-500 flex flex-col justify-center h-full hover:scale-105 transition-transform">
+                            <div class="flex items-center gap-2 md:gap-3 mb-1">
+                                <i class="fas fa-bus text-blue-600 text-lg md:text-xl"></i>
+                                <h3 class="font-bold text-sm md:text-base">
+                                    <span class="lang-ar">رحلات مباشرة</span>
+                                    <span class="lang-en">Direct Trips</span>
+                                </h3>
+                            </div>
+                            <p class="text-slate-500 text-[10px] md:text-xs leading-tight">
+                                <span class="lang-ar">من البيت للجامعة مباشرة.</span>
+                                <span class="lang-en">Direct from home.</span>
+                            </p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div
+                            class="bg-white p-3 md:p-4 rounded-xl shadow-lg border-r-4 border-green-500 flex flex-col justify-center h-full hover:scale-105 transition-transform">
+                            <div class="flex items-center gap-2 md:gap-3 mb-1">
+                                <i class="fas fa-clock text-green-600 text-lg md:text-xl"></i>
+                                <h3 class="font-bold text-sm md:text-base">
+                                    <span class="lang-ar">التزام بالمواعيد</span>
+                                    <span class="lang-en">Punctuality</span>
+                                </h3>
+                            </div>
+                            <p class="text-slate-500 text-[10px] md:text-xs leading-tight">
+                                <span class="lang-ar">مسارات ومواعيد دقيقة.</span>
+                                <span class="lang-en">Precise routes & times.</span>
+                            </p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div
+                            class="bg-white p-3 md:p-4 rounded-xl shadow-lg border-r-4 border-purple-500 flex flex-col justify-center h-full hover:scale-105 transition-transform">
+                            <div class="flex items-center gap-2 md:gap-3 mb-1">
+                                <i class="fas fa-shield-alt text-purple-600 text-lg md:text-xl"></i>
+                                <h3 class="font-bold text-sm md:text-base">
+                                    <span class="lang-ar">أمان كامل</span>
+                                    <span class="lang-en">Full Safety</span>
+                                </h3>
+                            </div>
+                            <p class="text-slate-500 text-[10px] md:text-xs leading-tight">
+                                <span class="lang-ar">شبكة مراقبة وتتبع.</span>
+                                <span class="lang-en">Monitoring network.</span>
+                            </p>
+                        </div>
+
+                        <!-- Card 4 (Restored) -->
+                        <div
+                            class="bg-white p-3 md:p-4 rounded-xl shadow-lg border-r-4 border-yellow-500 flex flex-col justify-center h-full hover:scale-105 transition-transform">
+                            <div class="flex items-center gap-2 md:gap-3 mb-1">
+                                <i class="fas fa-brain text-yellow-600 text-lg md:text-xl"></i>
+                                <h3 class="font-bold text-sm md:text-base">
+                                    <span class="lang-ar">راحة وتركيز</span>
+                                    <span class="lang-en">Comfort & Focus</span>
+                                </h3>
+                            </div>
+                            <p class="text-slate-500 text-[10px] md:text-xs leading-tight">
+                                <span class="lang-ar">ابدأ يومك بذهن صافي.</span>
+                                <span class="lang-en">Clarity of mind.</span>
+                            </p>
+                        </div>
+
+                        <!-- Card 5 (Restored) -->
+                        <div
+                            class="bg-white p-3 md:p-4 rounded-xl shadow-lg border-r-4 border-cyan-500 flex flex-col justify-center h-full hover:scale-105 transition-transform">
+                            <div class="flex items-center gap-2 md:gap-3 mb-1">
+                                <i class="fas fa-mobile-alt text-cyan-600 text-lg md:text-xl"></i>
+                                <h3 class="font-bold text-sm md:text-base">
+                                    <span class="lang-ar">نظام ذكي</span>
+                                    <span class="lang-en">Smart System</span>
+                                </h3>
+                            </div>
+                            <p class="text-slate-500 text-[10px] md:text-xs leading-tight">
+                                <span class="lang-ar">تطبيق شامل للحجز والدفع.</span>
+                                <span class="lang-en">All-in-one app.</span>
+                            </p>
+                        </div>
+
+                        <!-- Card 6 (Restored) -->
+                        <div
+                            class="bg-white p-3 md:p-4 rounded-xl shadow-lg border-r-4 border-rose-500 flex flex-col justify-center h-full hover:scale-105 transition-transform">
+                            <div class="flex items-center gap-2 md:gap-3 mb-1">
+                                <i class="fas fa-chart-line text-rose-600 text-lg md:text-xl"></i>
+                                <h3 class="font-bold text-sm md:text-base">
+                                    <span class="lang-ar">قابل للتوسع</span>
+                                    <span class="lang-en">Scalable</span>
+                                </h3>
+                            </div>
+                            <p class="text-slate-500 text-[10px] md:text-xs leading-tight">
+                                <span class="lang-ar">يخدم جميع المؤسسات.</span>
+                                <span class="lang-en">Serves everyone.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <!-- Slide 4: How It Works (Prototype) -->
+    <div class="slide" id="slide-4" data-steps="1">
+        <!-- Added pt-16 md:pt-24 to push title down -->
+        <div class="container mx-auto max-w-4xl text-center w-full flex flex-col items-center pt-16 md:pt-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8 fade-up">
+                <span class="lang-ar">كيف يعمل</span>
+                <span class="lang-en">How It Works</span>
+            </h2>
+
+            <div class="relative inline-block fade-up step-content step-1" onmouseenter="cancelAutoSlide()"
+                onmouseleave="startAutoSlide()">
+                <div class="iphone-frame" onclick="openLightbox()">
+                    <div class="iphone-notch"></div>
+                    <div class="iphone-screen bg-slate-900" id="iphone-screen">
+                        <!-- Images will be injected here -->
+                        <img src="assets/appHomePage.JPG" class="proto-img active" data-en="Home Screen"
+                            data-ar="الرئيسية" alt="Home">
+                        <img src="assets/appTripMap.JPG" class="proto-img" data-en="Trip Map" data-ar="خريطة الرحلة"
+                            alt="Map">
+                        <img src="assets/appHomePageTripsDetails.JPG" class="proto-img" data-en="Trip Details"
+                            data-ar="تفاصيل الرحلة" alt="Details">
+                        <img src="assets/appNotification.JPG" class="proto-img" data-en="Notifications"
+                            data-ar="الإشعارات" alt="Notifications">
+                        <img src="assets/appProfile.JPG" class="proto-img" data-en="User Profile" data-ar="الملف الشخصي"
+                            alt="Profile">
+                        <img src="assets/appSettings.JPG" class="proto-img" data-en="Settings" data-ar="الإعدادات"
+                            alt="Settings">
+                        <img src="assets/appSettings2.JPG" class="proto-img" data-en="More Options"
+                            data-ar="المزيد من الخيارات" alt="Settings 2">
+                    </div>
+                    <!-- Zoom Hint Overlay (Optional) -->
+                    <div class="absolute bottom-4 left-0 w-full text-center pointer-events-none">
+                        <span class="bg-black/50 text-white text-[10px] px-2 py-1 rounded-full backdrop-blur-sm">Click
+                            to Zoom</span>
+                    </div>
+                </div>
+
+                <!-- Phone Nav Buttons -->
+                <button class="phone-nav phone-prev" onclick="moveProto(-1)" onmouseenter="cancelAutoSlide()"
+                    onmouseleave="startAutoSlide()">
+                    <i class="fas fa-chevron-left text-xl"></i>
+                </button>
+                <button class="phone-nav phone-next" onclick="moveProto(1)" onmouseenter="cancelAutoSlide()"
+                    onmouseleave="startAutoSlide()">
+                    <i class="fas fa-chevron-right text-xl"></i>
+                </button>
+            </div>
+
+            <p class="mt-8 text-slate-500 font-bold fade-up">
+                <span class="lang-ar">استعرض التطبيق</span>
+                <span class="lang-en">Browse the App</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Market Opportunity -->
+    <div class="slide" id="slide-5" data-steps="3">
+        <div class="container mx-auto max-w-5xl w-full">
+            <div class="mb-8 md:mb-32 text-center fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary inline-block border-b-4 border-primary/20 pb-2">
+                    <span class="lang-ar">فرصة السوق</span>
+                    <span class="lang-en">Market Opportunity</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-end fade-up pb-12 md:pb-0">
+                <!-- SOM -->
+                <div
+                    class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border-b-8 border-blue-400 z-30 mb-0 relative md:transform md:-translate-y-0 step-content step-1">
+                    <div
+                        class="flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start mb-2 md:mb-4 md:border-b md:h-32 md:pb-4">
+                        <span class="text-blue-500 font-black text-4xl mb-0 md:mb-auto">SOM</span>
+                        <h3 class="text-2xl font-bold text-slate-800">
+                            <span class="lang-ar">40,000 طالب</span>
+                            <span class="lang-en">40,000 Students</span>
+                        </h3>
+                    </div>
+                    <p class="text-sm text-slate-500">
+                        <span class="lang-ar">السوق المتوقع الوصول إليه في السنة الأولى.</span>
+                        <span class="lang-en">Expected reachable market in Year 1.</span>
+                    </p>
+                </div>
+
+                <!-- SAM -->
+                <div
+                    class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border-b-8 border-blue-600 z-20 mb-0 relative md:transform md:-translate-y-8 step-content step-2">
+                    <div
+                        class="flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start mb-2 md:mb-4 md:border-b md:h-40 md:pb-4">
+                        <span class="text-blue-600 font-black text-4xl mb-0 md:mb-auto">SAM</span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-slate-800">
+                            <span class="lang-ar">300,000 طالب</span>
+                            <span class="lang-en">300,000 Students</span>
+                        </h3>
+                    </div>
+                    <p class="text-sm text-slate-500">
+                        <span class="lang-ar">الجامعات الخاصة (أول 3 سنوات).</span>
+                        <span class="lang-en">Private Universities (First 3 Years).</span>
+                    </p>
+                </div>
+
+                <!-- TAM -->
+                <div
+                    class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border-b-8 border-blue-800 z-10 relative md:transform md:-translate-y-16 step-content step-3">
+                    <div
+                        class="flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start mb-2 md:mb-4 md:border-b md:h-48 md:pb-4">
+                        <span class="text-blue-800 font-black text-4xl mb-0 md:mb-auto">TAM</span>
+                        <h3 class="text-3xl md:text-4xl font-bold text-slate-800">
+                            <span class="lang-ar">48 مليار</span>
+                            <span class="lang-en">48 Billion</span>
+                        </h3>
+                    </div>
+                    <p class="text-sm text-slate-500">
+                        <span class="lang-ar">حجم السوق الكلي في مصر سنويًا.</span>
+                        <span class="lang-en">Total Annual Market Size in Egypt.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Business Model (One Group) -->
+    <div class="slide" id="slide-6" data-steps="1">
+        <div class="container mx-auto max-w-6xl w-full">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 text-center fade-up">
+                <span class="lang-ar">نموذج العمل</span>
+                <span class="lang-en">Business Model</span>
+            </h2>
+            <p class="text-center text-slate-500 mb-8 md:mb-12 fade-up text-sm md:text-base">
+                <span class="lang-ar">كيف نحقق الأرباح والاستدامة</span>
+                <span class="lang-en">How we achieve utility & profit</span>
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 fade-up step-content step-1">
+                <!-- Model 1 -->
+                <div class="bg-white p-5 md:p-6 rounded-2xl shadow-md border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-10 h-10 md:w-12 md:h-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 text-lg md:text-xl shrink-0">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">
+                            <span class="lang-ar">اشتراكات الطلاب</span>
+                            <span class="lang-en">Student Subs</span>
+                        </h3>
+                    </div>
+                    <ul class="text-sm text-slate-600 space-y-2">
+                        <li class="flex justify-between">
+                            <span class="lang-ar">خاصة:</span><span class="lang-en">Private:</span>
+                            <span class="font-bold">1500 EGP</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="lang-ar">أهلية:</span><span class="lang-en">Nat:</span>
+                            <span class="font-bold">1000 EGP</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="lang-ar">حكومية:</span><span class="lang-en">Public:</span>
+                            <span class="font-bold">750 EGP</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Model 2 -->
+                <div class="bg-white p-5 md:p-6 rounded-2xl shadow-md border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-10 h-10 md:w-12 md:h-12 bg-teal-100 rounded-lg flex items-center justify-center text-teal-600 text-lg md:text-xl shrink-0">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">
+                            <span class="lang-ar">الجامعات</span>
+                            <span class="lang-en">Universities</span>
+                        </h3>
+                    </div>
+                    <p class="text-sm text-slate-600">
+                        <span class="lang-ar">رسوم سنوية مقابل استخدام النظام ولوحات التحكم لإدارة النقل.</span>
+                        <span class="lang-en">Annual fees for using the platform & dashboards.</span>
+                    </p>
+                </div>
+
+                <!-- Model 3 -->
+                <div class="bg-white p-5 md:p-6 rounded-2xl shadow-md border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-10 h-10 md:w-12 md:h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600 text-lg md:text-xl shrink-0">
+                            <i class="fas fa-bus-alt"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">
+                            <span class="lang-ar">شراكات النقل</span>
+                            <span class="lang-en">Partnerships</span>
+                        </h3>
+                    </div>
+                    <p class="text-sm text-slate-600">
+                        <span class="lang-ar">نسبة من الأرباح مقابل إدارة الأسطول وزيادة الرحلات.</span>
+                        <span class="lang-en">Commission for fleet management & increased trips.</span>
+                    </p>
+                </div>
+
+                <!-- Model 4 -->
+                <div class="bg-white p-5 md:p-6 rounded-2xl shadow-md border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-10 h-10 md:w-12 md:h-12 bg-pink-100 rounded-lg flex items-center justify-center text-pink-600 text-lg md:text-xl shrink-0">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">
+                            <span class="lang-ar">البيانات</span>
+                            <span class="lang-en">Data</span>
+                        </h3>
+                    </div>
+                    <p class="text-sm text-slate-600">
+                        <span class="lang-ar">توفير تحليلات قيمة للجامعات لتعزيز كفاءة التشغيل.</span>
+                        <span class="lang-en">Providing valuable analytics for universities.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Competitors -->
+    <div class="slide" id="slide-7" data-steps="2">
+        <div class="container mx-auto max-w-5xl w-full">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8 md:mb-12 text-center fade-up">
+                <span class="lang-ar">المنافسين</span>
+                <span class="lang-en">Competitors</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 fade-up">
+                <div
+                    class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-t-8 border-gray-400 flex flex-col items-center text-center step-content step-1">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 text-2xl md:text-3xl mb-4 md:mb-6">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-slate-700">Direct Competitors</h3>
+                    <p class="text-base md:text-lg text-slate-500">
+                        <span class="lang-ar">لا يوجد منافس مباشر يقدم نظام متكامل ذكي حاليًا.</span>
+                        <span class="lang-en">No direct competitor currently offers a smart integrated system.</span>
+                    </p>
+                </div>
+
+                <div
+                    class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-t-8 border-orange-400 flex flex-col items-center text-center step-content step-2">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 text-2xl md:text-3xl mb-4 md:mb-6">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-slate-700">Indirect Competitors</h3>
+                    <ul class="text-right text-slate-600 space-y-3 w-full px-4 md:px-8 list-disc text-sm md:text-base">
+                        <li>
+                            <span class="lang-ar">شركات النقل التقليدية (فردية).</span>
+                            <span class="lang-en">Traditional transport (individual).</span>
+                        </li>
+                        <li>
+                            <span class="lang-ar">تطبيقات النقل (Uber/Careem).</span>
+                            <span class="lang-en">Ride-hailing apps (Uber/Careem).</span>
+                        </li>
+                        <li>
+                            <span class="lang-ar">نظم داخلية في بعض الجامعات (محدودة).</span>
+                            <span class="lang-en">Internal university systems (limited).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Team -->
+    <div class="slide bg-slate-100" id="slide-8" data-steps="2">
+        <div class="container mx-auto max-w-6xl text-center w-full pt-2 md:pt-24">
+            <div class="mb-12 md:mb-16 fade-up">
+                <span
+                    class="text-primary font-bold tracking-wide uppercase bg-blue-100 px-4 py-1 rounded-full text-xs md:text-sm">Our
+                    Strength</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-4">
+                    <span class="lang-ar">فريق العمل</span>
+                    <span class="lang-en">The Team</span>
+                </h2>
+            </div>
+
+            <div class="grid gap-4 md:gap-6 fade-up pb-10">
+                <!-- Top Row - Step 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center step-content step-1">
+                    <!-- Mohamed -->
+                    <div
+                        class="bg-white rounded-2xl p-5 shadow-lg flex flex-col items-center text-center h-full hover:scale-105 transition-transform max-w-sm mx-auto w-full">
+                        <div
+                            class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-4 border-slate-100 shadow-md shrink-0">
+                            <img src="assets/mohamed.jpeg" alt="Mohamed" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-full">
+                            <h3 class="text-lg font-bold text-slate-800">Mohamed Ramadan</h3>
+                            <p class="text-primary font-bold text-xs mb-2">Founder & CEO</p>
+                            <p class="text-slate-600 text-xs leading-relaxed"> The visionary behind EU-BUS, driving the
+                                mission to revolutionize student transportation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ahmed (You) -->
+                    <div
+                        class="bg-white rounded-2xl p-5 shadow-lg flex flex-col items-center text-center h-full hover:scale-105 transition-transform max-w-sm mx-auto w-full">
+                        <div
+                            class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-4 border-slate-100 shadow-md shrink-0">
+                            <img src="assets/ahmed.jpg" alt="Ahmed" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-full">
+                            <h3 class="text-lg font-bold text-slate-800">Ahmed Yousef</h3>
+                            <p class="text-primary font-bold text-xs mb-2">CDO - Data & Analytics Lead</p>
+                            <p class="text-slate-600 text-xs leading-relaxed">Data Analyst & Python Specialist. DTU ICPC
+                                Instructor, ECPC 2024 Participant. Data Science Instructor at DTU GDG.</p>
+                        </div>
+                    </div>
+
+                    <!-- Kareem -->
+                    <div
+                        class="bg-white rounded-2xl p-5 shadow-lg flex flex-col items-center text-center h-full hover:scale-105 transition-transform max-w-sm mx-auto w-full">
+                        <div
+                            class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-4 border-slate-100 shadow-md shrink-0">
+                            <img src="assets/kareem.jpeg" alt="Kareem" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-full">
+                            <h3 class="text-lg font-bold text-slate-800">Karim Mohamed</h3>
+                            <p class="text-primary font-bold text-xs mb-2">CISO - Infrastructure Lead</p>
+                            <p class="text-slate-600 text-xs leading-relaxed">Network & Cybersecurity Specialist. Huawei
+                                Student Ambassador. Expertise: CCNA | MCSA | Pen-Testing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row Step 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center step-content step-2">
+                    <!-- Gamal -->
+                    <div
+                        class="bg-white rounded-2xl p-5 shadow-lg flex flex-col items-center text-center h-full hover:scale-105 transition-transform max-w-sm mx-auto w-full">
+                        <div
+                            class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-4 border-slate-50 shrink-0">
+                            <img src="assets/gamal.jpeg" alt="Gamal" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-full">
+                            <h3 class="text-lg font-bold text-slate-800">Gamal Abdelnasser</h3>
+                            <p class="text-primary font-bold text-xs mb-2">Mobile & AI Lead</p>
+                            <p class="text-slate-600 text-xs leading-relaxed">Flutter & Android Dev. AI-Augmented
+                                Expert. Delivered 100% automated systems for intl clients.</p>
+                        </div>
+                    </div>
+
+                    <!-- Omar -->
+                    <div
+                        class="bg-white rounded-2xl p-5 shadow-lg flex flex-col items-center text-center h-full hover:scale-105 transition-transform max-w-sm mx-auto w-full">
+                        <div
+                            class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-4 border-slate-50 shrink-0">
+                            <img src="assets/omar.jpeg" alt="Omar" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-full">
+                            <h3 class="text-lg font-bold text-slate-800">Omar Essam</h3>
+                            <p class="text-primary font-bold text-xs mb-2">App Security Specialist</p>
+                            <p class="text-slate-600 text-xs leading-relaxed">Vulnerability Assessment Expert. Focus on
+                                Secure App Development, Threat Analysis & Compliance.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mahmoud -->
+                    <div
+                        class="bg-white rounded-2xl p-5 shadow-lg flex flex-col items-center text-center h-full hover:scale-105 transition-transform max-w-sm mx-auto w-full">
+                        <div
+                            class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-4 border-slate-50 shrink-0">
+                            <img src="assets/mahmoud.jpeg" alt="Mahmoud" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-full">
+                            <h3 class="text-lg font-bold text-slate-800">Mahmoud Mohammed</h3>
+                            <p class="text-primary font-bold text-xs mb-2">Backend & SysAdmin</p>
+                            <p class="text-slate-600 text-xs leading-relaxed">Backend Dev & SysAdmin. Ex-DEPI Student.
+                                Exp: IT Specialist at German Hospital & Mabaret El-Asafra.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Roadmap Part 1 (Years) -->
+    <div class="slide" id="slide-9" data-steps="3">
+        <div class="container mx-auto max-w-6xl w-full">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-12 text-center fade-up">
+                <span class="lang-ar">خارطة الطريق</span>
+                <span class="lang-en">Roadmap</span>
+            </h2>
+            <p class="text-center text-slate-500 mb-12 transform -translate-y-6 fade-up">Focus on Private University
+                Students</p>
+
+            <div class="space-y-6 md:space-y-8 max-w-4xl mx-auto px-4">
+                <!-- Year 1 -->
+                <div
+                    class="flex items-center gap-4 step-content step-1 bg-white p-6 rounded-2xl shadow-lg border-r-8 border-blue-500 transform transition-transform hover:scale-105">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl font-bold shrink-0">
+                        2026/27
+                    </div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-1">
+                            <span class="lang-ar">الوصول إلى 40,000 طالب</span>
+                            <span class="lang-en">Reach 40,000 Students</span>
+                        </h3>
+                        <p class="text-slate-500">
+                            <span class="lang-ar">بداية التشغيل في الجامعات الخاصة الكبرى في المناطق الحيوية.</span>
+                            <span class="lang-en">Launch in major private universities in vital areas.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Year 2 -->
+                <div
+                    class="flex items-center gap-4 step-content step-2 bg-white p-6 rounded-2xl shadow-lg border-r-8 border-purple-500 transform transition-transform hover:scale-105">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-2xl font-bold shrink-0">
+                        2027/28
+                    </div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-1">
+                            <span class="lang-ar">الوصول إلى 150,000 طالب</span>
+                            <span class="lang-en">Reach 150,000 Students</span>
+                        </h3>
+                        <p class="text-slate-500">
+                            <span class="lang-ar">التوسع الجغرافي ليشمل محافظات جديدة وزيادة الأسطول.</span>
+                            <span class="lang-en">Geographic expansion & fleet increase.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Year 3 -->
+                <div
+                    class="flex items-center gap-4 step-content step-3 bg-white p-6 rounded-2xl shadow-lg border-r-8 border-green-500 transform transition-transform hover:scale-105">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-2xl font-bold shrink-0">
+                        2028/29
+                    </div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-1">
+                            <span class="lang-ar">الوصول إلى 300,000 طالب</span>
+                            <span class="lang-en">Reach 300,000 Students</span>
+                        </h3>
+                        <p class="text-slate-500">
+                            <span class="lang-ar">تغطية شاملة لمعظم الجامعات الخاصة وإطلاق خدمات مميزة.</span>
+                            <span class="lang-en">Full coverage of private universities & premium services.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Roadmap Part 2 (Strategic) -->
+    <div class="slide" id="slide-10" data-steps="2">
+        <div class="container mx-auto max-w-6xl w-full text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-16 text-center fade-up">
+                <span class="lang-ar">التوسع الاستراتيجي</span>
+                <span class="lang-en">Strategic Expansion</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 px-4 max-w-5xl mx-auto">
+                <!-- Strategy 1 -->
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-xl border-t-8 border-indigo-500 step-content step-1 transform hover:-translate-y-2 transition-transform">
+                    <div
+                        class="w-20 h-20 mx-auto bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-3xl mb-6">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">
+                        <span class="lang-ar">استحواذ ودمج</span>
+                        <span class="lang-en">M&A</span>
+                    </h3>
+                    <p class="text-slate-600 text-lg leading-relaxed">
+                        <span class="lang-ar">تجهيز الاستحواذ على شركات النقل الخاصة التي تمتلك أساطيل نقل طلاب حالية
+                            لضمها للمنصة.</span>
+                        <span class="lang-en">Acquiring companies with existing student transport fleets.</span>
+                    </p>
+                </div>
+
+                <!-- Strategy 2 -->
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-xl border-t-8 border-rose-500 step-content step-2 transform hover:-translate-y-2 transition-transform">
+                    <div
+                        class="w-20 h-20 mx-auto bg-rose-100 rounded-full flex items-center justify-center text-rose-600 text-3xl mb-6">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">
+                        <span class="lang-ar">شراكات كبرى</span>
+                        <span class="lang-en">Major Partnerships</span>
+                    </h3>
+                    <p class="text-slate-600 text-lg leading-relaxed">
+                        <span class="lang-ar">الاتفاق مع شركات كبرى مثل <span class="text-rose-600 font-bold">شركة النصر
+                                للسيارات</span> لإدخال باصات جديدة كهربائية ومطورة للسوق.</span>
+                        <span class="lang-en">Partnerships with major firms like <span
+                                class="text-rose-600 font-bold">El Nasr Auto</span> to introduce electric buses.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-16 fade-up">
+                <span
+                    class="inline-block px-6 py-2 bg-blue-600 text-white rounded-full font-bold shadow-lg animate-pulse">5-Year
+                    Vision</span>
+                <p class="mt-4 text-slate-500 text-lg">
+                    <span class="lang-ar">السيطرة الكاملة - الخيار الأول لنقل الطلاب في مصر</span>
+                    <span class="lang-en">Full Dominance - The #1 Choice for Student Transport in Egypt</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Conclusion -->
+    <div class="slide flex items-center justify-center text-center" id="slide-11" data-steps="0">
+        <div class="z-20 p-6 md:p-8 max-w-4xl mx-auto w-full pt-24 md:pt-32">
+            <div
+                class="w-20 h-20 md:w-24 md:h-24 bg-white rounded-full mx-auto flex items-center justify-center shadow-2xl border-4 border-blue-500 mb-6 md:mb-8 animate-float">
+                <i class="fas fa-check text-3xl md:text-5xl text-blue-600"></i>
+            </div>
+
+            <h2
+                class="text-3xl md:text-5xl font-black mb-4 tracking-tight fade-up text-primary drop-shadow-sm force-center">
+                <span class="lang-ar">شكرًا لاستماعكم</span>
+                <span class="lang-en">Thank You for Listening</span>
+            </h2>
+            <h3 class="text-xl md:text-3xl font-bold text-slate-700 mb-8 fade-up force-center">Thank You</h3>
+
+            <div
+                class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-xl border border-white max-w-3xl mx-auto fade-up">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+
+                    <div
+                        class="md:text-right border-b md:border-b-0 md:border-l border-slate-200 pb-6 md:pb-0 md:pl-6 flex flex-col items-center md:items-end">
+                        <div
+                            class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-slate-100 shadow-md mb-3">
+                            <img src="assets/mohamed.jpeg" alt="Mohamed Ramadan" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-xl md:text-2xl font-bold text-slate-800 mb-1">Mohamed Ramadan</h4>
+                        <p class="text-blue-600 font-bold text-sm md:text-base uppercase tracking-wider">Founder & CEO
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <h4
+                            class="text-lg font-bold text-slate-800 mb-2 border-b-2 border-primary/10 inline-block mx-auto md:mx-0 pb-1">
+                            <span class="lang-ar">لنتواصل معًا</span>
+                            <span class="lang-en">Let's Connect</span>
+                        </h4>
+
+                        <a href="mailto:eubus.eg@gmail.com"
+                            class="flex items-center justify-center md:justify-start gap-3 group hover:bg-white/50 p-2 rounded-lg transition-all">
+                            <div
+                                class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-envelope text-sm"></i>
+                            </div>
+                            <span class="font-bold text-slate-700 text-sm md:text-base"
+                                dir="ltr">eubus.eg@gmail.com</span>
+                        </a>
+
+                        <a href="https://wa.me/201505794406" target="_blank"
+                            class="flex items-center justify-center md:justify-start gap-3 group hover:bg-white/50 p-2 rounded-lg transition-all">
+                            <div
+                                class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </div>
+                            <span class="font-bold text-slate-700 text-sm md:text-base" dir="ltr">+20 15 05794406</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 md:mt-16">
+                <p class="text-slate-500 text-xs font-bold tracking-widest opacity-80">EU-BUS 2026 © All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Container -->
+    <div id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <button class="lightbox-nav lightbox-prev" onclick="moveLightbox(-1, event)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav lightbox-next" onclick="moveLightbox(1, event)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <img id="lightbox-img" src="" alt="Full View" onclick="event.stopPropagation()">
+        <!-- Stop propagation so click on image doesn't close -->
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
