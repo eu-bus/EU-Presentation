@@ -1,0 +1,586 @@
+        body {
+            font-family: 'Cairo', sans-serif;
+            overflow: hidden;
+            /* Prevent scrolling, use slides */
+            touch-action: manipulation;
+            /* Improve touch response */
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            /* Fallback */
+            height: 100dvh;
+            /* Mobile viewport fix */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Center on Desktop */
+            padding: 2rem;
+            overflow-y: auto;
+            /* Allow scrolling */
+            overflow-x: hidden;
+            z-index: 0;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            .slide {
+                display: block;
+                /* Block layout for scrolling */
+                padding: 1rem;
+                padding-top: 3.5rem;
+                /* Reduced from 5rem to lift titles up */
+                padding-bottom: 6rem;
+            }
+        }
+
+        /* Background Image Layer - FIXED Position */
+        .slide::before {
+            content: '';
+            position: fixed;
+            /* Stays fixed during scroll */
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Color Overlay Layer - FIXED Position */
+        .slide::after {
+            content: '';
+            position: fixed;
+            /* Stays fixed during scroll */
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Slide Specific Backgrounds */
+        #slide-1::before {
+            background-image: url('assets/banner.png');
+            filter: blur(2px);
+            /* Light blur */
+            opacity: 0.9;
+        }
+
+        #slide-1::after {
+            opacity: 0.4;
+        }
+
+        /* Subtle overlay for first slide */
+
+        #slide-2::before {
+            background-image: url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2071');
+        }
+
+        #slide-3::before {
+            background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069');
+        }
+
+        #slide-4::before {
+            background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070');
+        }
+
+        /* Market Opportunity: University Crowd / Scale */
+        #slide-5::before {
+            background-image: url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070');
+        }
+
+        #slide-6::before {
+            background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2032');
+        }
+
+        #slide-7::before {
+            background-image: url('https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?q=80&w=2072');
+        }
+
+        #slide-8::before {
+            background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070');
+        }
+
+        #slide-9::before {
+            background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021');
+        }
+
+        /* Strategic Expansion: Business Deal / Partnership */
+        #slide-10::before {
+            background-image: url('https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?q=80&w=2032');
+        }
+
+        /* Conclusion: Gentle Abstract or Banner */
+        #slide-11::before {
+            background-image: url('assets/banner.png');
+            filter: blur(4px);
+            opacity: 0.8;
+        }
+
+        @media (min-width: 768px) {
+            .slide {
+                justify-content: center;
+                /* Desktop: Center vertically */
+                padding-top: 0;
+            }
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 10;
+        }
+
+        /* Nav & Animation Helpers */
+        .step-hidden {
+            opacity: 0 !important;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        .step-visible {
+            opacity: 1 !important;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Animations */
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.3));
+                border-radius: 50%;
+            }
+
+            50% {
+                filter: drop-shadow(0 0 25px rgba(37, 99, 235, 0.6));
+                border-radius: 50%;
+            }
+
+            100% {
+                filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.3));
+                border-radius: 50%;
+            }
+        }
+
+        .logo-glow {
+            animation: glow 3s infinite ease-in-out;
+            border-radius: 50%;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .active .fade-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typing Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .nav-btn {
+            position: fixed;
+            bottom: 2rem;
+            z-index: 50;
+            background-color: white;
+            color: #2563EB;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: #2563EB;
+            color: white;
+            border-color: #2563EB;
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .next-btn {
+            left: 2rem;
+        }
+
+        .prev-btn {
+            right: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-btn {
+                bottom: 1.5rem;
+                width: 45px;
+                height: 45px;
+            }
+
+            .next-btn {
+                left: 1.5rem;
+            }
+
+            .prev-btn {
+                right: 1.5rem;
+            }
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            height: 5px;
+            background: #2563EB;
+            transition: width 0.5s;
+            z-index: 50;
+        }
+
+        /* Language Toggle Styles */
+        .lang-en {
+            display: none;
+        }
+
+        body.en-mode .lang-ar {
+            display: none;
+        }
+
+        body.en-mode .lang-en {
+            display: inline;
+        }
+
+        /* or block depending on context, handled inline typically */
+
+        /* Force LTR for English mode */
+        body.en-mode {
+            direction: ltr !important;
+            text-align: left;
+        }
+
+        body.en-mode .slide {
+            text-align: left;
+        }
+
+        /* Fix alignments in English mode */
+        body.en-mode .text-right {
+            text-align: left;
+        }
+
+        body.en-mode .border-r-4 {
+            border-right-width: 0;
+            border-left-width: 4px;
+        }
+
+        body.en-mode .md\:border-r-4 {
+            border-right-width: 0;
+            border-left-width: 4px;
+        }
+
+        /* Nav buttons swap */
+        body.en-mode .next-btn {
+            right: 2rem;
+            left: auto;
+        }
+
+        body.en-mode .prev-btn {
+            left: 2rem;
+            right: auto;
+        }
+
+        body.en-mode .list-disc {
+            padding-left: 1.5rem;
+            padding-right: 0;
+        }
+
+        /* Ensure specific elements remain centered in English mode */
+        body.en-mode .force-center {
+            text-align: center !important;
+        }
+
+        .lang-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 99px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 800;
+            color: #2563EB;
+            cursor: pointer;
+            border: 2px solid #2563EB;
+            transition: all 0.2s;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-btn:hover {
+            background: #2563EB;
+            color: white;
+        }
+
+        /* iPhone Mockup CSS */
+        .iphone-frame {
+            width: 300px;
+            height: 600px;
+            background: #1e293b;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 8px;
+            /* Reduced padding from 12px to 8px to give more space for screen */
+            position: relative;
+            margin: 0 auto;
+            border: 4px solid #475569;
+            cursor: zoom-in;
+            /* Indicate clickable */
+            transition: transform 0.3s;
+        }
+
+        .iphone-frame:hover {
+            transform: scale(1.02);
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: black;
+            border-radius: 32px;
+            /* Adjusted to match frame closely */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .iphone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 25px;
+            background: #1e293b;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 20;
+        }
+
+        .proto-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .proto-img.active {
+            opacity: 1;
+        }
+
+        /* Phone Nav Buttons Enhanced */
+        .phone-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: #334155;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 25;
+            border: none;
+        }
+
+        .phone-nav:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
+            color: #0f172a;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .phone-prev {
+            left: -70px;
+        }
+
+        .phone-next {
+            right: -70px;
+        }
+
+        /* Lightbox Styles */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            /* Darker overlay for better focus */
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            padding: 2rem;
+            flex-direction: column;
+        }
+
+        #lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #lightbox-img {
+            max-height: 80vh;
+            /* Reduced to make room for caption */
+            max-width: 90vw;
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+            object-fit: contain;
+        }
+
+        #lightbox.active #lightbox-img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10002;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10001;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 2rem;
+        }
+
+        .lightbox-next {
+            right: 2rem;
+        }
+
+        .lightbox-caption {
+            position: relative;
+            /* Changed from absolute */
+            order: -1;
+            /* Move visually above the image */
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 2rem;
+            /* Larger text */
+            font-weight: bold;
+            text-align: center;
+            z-index: 10001;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            background: none;
+            /* Removed background box */
+            padding: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .iphone-frame {
+                width: 260px;
+                height: 520px;
+            }
+
+            .phone-prev {
+                left: -20px;
+            }
+
+            .phone-next {
+                right: -20px;
+            }
+        }
