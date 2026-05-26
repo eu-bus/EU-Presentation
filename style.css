@@ -372,6 +372,14 @@
             color: white;
         }
 
+/* Voice notice styles (center top) */
+#voice-notice{display:none}
+#voice-notice-inner{transition:all .28s cubic-bezier(.2,.9,.2,1);}
+#voice-notice-inner:hover{transform:translateY(-2px)}
+#voice-recognized{font-weight:700}
+#voice-reply{opacity:.85}
+#auto-counter{display:none}
+
         /* iPhone Mockup CSS */
         .iphone-frame {
             width: 300px;

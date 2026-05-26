@@ -41,6 +41,26 @@
         <span class="lang-en text-xl">AR</span>
     </button>
 
+    <!-- Voice notification (center top, iPhone-like) -->
+    <div id="voice-notice" style="position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:10002;pointer-events:none;display:none;">
+        <div id="voice-notice-inner" style="backdrop-filter:blur(6px);background:rgba(255,255,255,0.9);border-radius:14px;padding:8px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 8px 24px rgba(2,6,23,0.18);min-width:240px;max-width:80vw;">
+            <div id="voice-status" style="flex:0 0 auto;display:flex;align-items:center;gap:8px">
+                <span id="voice-dot" style="width:10px;height:10px;border-radius:50%;background:#ef4444;display:inline-block;box-shadow:0 0 8px rgba(239,68,68,0.6)"></span>
+            </div>
+            <div style="flex:1 1 auto;min-width:0">
+                <div id="voice-recognized" style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;color:#0f172a">Listening...</div>
+                <div id="voice-reply" style="font-size:12px;color:#374151;opacity:0.9">Say a command — e.g. "next", "start"</div>
+            </div>
+            <div id="auto-counter" style="flex:0 0 auto;display:none;align-items:center;padding:4px 8px;border-radius:12px;background:#111827;color:#fff;font-weight:700;font-size:13px">15s</div>
+        </div>
+    </div>
+
+    <!-- Voice toggle (microphone) -->
+    <button id="voice-toggle" aria-label="Voice Control" title="Voice Control"
+        style="position:fixed;right:1rem;top:1rem;background:white;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(15,23,42,0.08);z-index:10001;pointer-events:auto">
+        <i id="voice-icon" class="fas fa-microphone text-lg text-red-600"></i>
+    </button>
+
     <!-- Progress Bar -->
     <div id="progress" class="progress-bar" style="width: 0%;"></div>
 
